@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Learning to Be Kind is an interactive kindness game for children with guides, stories, games, levels, and progress tracking.">
+  <meta name="theme-color" content="#7a57ff">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Learning to Be Kind">
+  <meta name="application-name" content="Learning to Be Kind">
+  <meta name="msapplication-TileColor" content="#7a57ff">
+  <title>Learning to Be Kind</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="shortcut icon" href="icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-scene" aria-hidden="true">
+    <span class="bg-blob blob-one"></span>
+    <span class="bg-blob blob-two"></span>
+    <span class="bg-blob blob-three"></span>
+    <span class="bg-blob blob-four"></span>
+    <span class="bg-shape star star-one"></span>
+    <span class="bg-shape star star-two"></span>
+    <span class="bg-shape circle circle-one"></span>
+    <span class="bg-shape circle circle-two"></span>
+    <span class="bg-shape circle circle-three"></span>
+    <span class="bg-shape ring ring-one"></span>
+    <span class="bg-shape ring ring-two"></span>
+    <span class="mesh mesh-one"></span>
+    <span class="mesh mesh-two"></span>
+  </div>
+
+  <div class="celebration-layer" id="celebration-layer" aria-hidden="true"></div>
+
+  <main class="app-stage">
+    <header class="topbar" id="topbar">
+      <div class="brand-mark">
+        <span class="brand-icon">&#10024;</span>
+        <div>
+          <p class="brand-overline">Interactive Kindness Game</p>
+          <h1 class="brand-title">Learning to Be Kind</h1>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+          <div class="topbar-stats">
+            <div class="stat-pill glass-card">
+              <span class="stat-pill-icon">&#11088;</span>
+              <span><strong id="points-count">0</strong> points</span>
+            </div>
+            <div class="stat-pill glass-card">
+              <span class="stat-pill-icon">&#129689;</span>
+              <span><strong id="coins-count">0</strong> coins</span>
+            </div>
+            <div class="stat-pill glass-card">
+              <span class="stat-pill-icon">&#127942;</span>
+              <span><strong id="activity-count">0</strong> completed</span>
+            </div>
+          <div class="stat-pill glass-card">
+            <span class="stat-pill-icon">&#128200;</span>
+            <span><strong id="current-level-indicator">Level 1</strong></span>
+          </div>
+        </div>
+
+        <button class="voice-toggle glass-card" id="voice-toggle" type="button" aria-pressed="true">
+          <span class="voice-toggle-icon" id="voice-toggle-icon">&#128266;</span>
+          <span id="voice-toggle-label">Voice On</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="screen-stack">
+      <!-- Welcome -->
+      <section class="screen active" id="welcome-screen" data-screen="welcome">
+        <div class="screen-shell splash-shell">
+          <div class="hero-copy">
+            <span class="eyebrow">Character-driven kindness platform</span>
+            <h2 class="hero-title">Learning to Be Kind</h2>
+            <p class="hero-subtitle">Play, learn, and grow into a kind human &#127752;</p>
+            <p class="hero-text">
+              Explore a premium learning experience with full-body guides, voiced feedback, interactive reels, simulation challenges, daily tasks, levels, badges, and progress tracking.
+            </p>
+
+            <div class="hero-actions">
+              <button class="primary-button bounce-button" id="start-button" type="button">Start Adventure</button>
+            </div>
+
+            <div class="hero-metrics">
+              <article class="metric-card glass-card">
+                <span class="metric-kicker">Interactive</span>
+                <strong>Shorts + mini simulations</strong>
+                <p>Swipe through scenarios, make decisions, and solve small kindness challenges.</p>
+              </article>
+              <article class="metric-card glass-card">
+                <span class="metric-kicker">Persistent</span>
+                <strong>Full-body guide companion</strong>
+                <p>Your chosen guide stays with you, talks aloud, reacts, and helps you throughout the platform.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="hero-stage glass-card">
+            <div class="hero-stage-glow"></div>
+            <div class="device-frame">
+              <div class="device-notch"></div>
+              <div class="device-screen">
+                <div class="hero-character-wrap">
+                  <span class="hero-face">&#129303;</span>
+                  <span class="spark spark-one">&#10024;</span>
+                  <span class="spark spark-two">&#10024;</span>
+                  <span class="spark spark-three">&#10024;</span>
+                </div>
+
+                <div class="hero-chip hero-chip-top">Kind</div>
+                <div class="hero-chip hero-chip-right">Respect</div>
+                <div class="hero-chip hero-chip-bottom">Responsibility</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Age -->
+      <section class="screen" id="age-screen" data-screen="age">
+        <div class="screen-shell center-shell">
+          <div class="section-heading">
+            <span class="eyebrow">Step 1</span>
+            <h2>How old are you?</h2>
+            <p>Choose your age so we can unlock the right guide family and the right level range for your adventure.</p>
+          </div>
+
+          <div class="age-workbench">
+            <article class="glass-card age-selection-card">
+              <div class="age-grid" id="age-grid"></div>
+            </article>
+
+            <aside class="glass-card selection-panel">
+              <div class="panel-topline">
+                <span class="panel-badge">Guide pairing</span>
+                <span class="panel-status" id="age-panel-status">Waiting for selection</span>
+              </div>
+
+              <div class="selection-display">
+                <p class="summary-label">Selected age</p>
+                <p class="summary-value" id="selected-age-label">Pick an age to continue</p>
+              </div>
+
+              <div class="summary-chip" id="age-group-label">Guide group waiting...</div>
+
+              <div class="pool-preview">
+                <div class="mini-preview">
+                  <span>&#128060;</span>
+                  <span>&#129418;</span>
+                  <span>&#129302;</span>
+                  <span>&#128105;</span>
+                </div>
+                <p class="panel-copy">Each age group unlocks different personalities, dialogue styles, and learning levels designed for beginners, readers, and puzzle-solvers.</p>
+              </div>
+            </aside>
+          </div>
+
+          <div class="screen-actions">
+            <button class="secondary-button" id="back-to-welcome" type="button">Back</button>
+            <button class="primary-button" id="reveal-guide-button" type="button" disabled>Reveal My Guide</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reveal -->
+      <section class="screen" id="reveal-screen" data-screen="reveal">
+        <div class="screen-shell center-shell reveal-shell">
+          <div class="section-heading reveal-heading">
+            <span class="eyebrow">Step 2</span>
+            <h2>Meet Your Guide!</h2>
+            <p>Your guide is now a full-body learning companion with a personality, animation states, tips, and spoken feedback.</p>
+          </div>
+
+          <article class="glass-card reveal-card">
+            <div class="reveal-avatar-wrap">
+              <div class="avatar-aura"></div>
+              <div class="reveal-avatar" id="reveal-avatar" aria-live="polite"></div>
+            </div>
+
+            <div class="reveal-copy">
+              <span class="reveal-chip" id="reveal-age-chip">Age Group</span>
+              <h3 id="reveal-name">Guide Name</h3>
+              <p class="reveal-intro" id="reveal-intro">Guide intro text will appear here.</p>
+              <p class="reveal-personality" id="reveal-personality">Personality details will appear here.</p>
+              <p class="reveal-style" id="reveal-style">Dialogue style will appear here.</p>
+
+              <div class="guide-note glass-strip">
+                <span class="guide-note-icon">&#127942;</span>
+                <span>Full-body guide unlocked</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="screen-actions">
+            <button class="secondary-button" id="back-to-age" type="button">Choose Again</button>
+            <button class="primary-button" id="continue-button" type="button">Continue</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Home -->
+      <section class="screen" id="platform-screen" data-screen="platform">
+        <div class="screen-shell home-shell">
+          <article class="glass-card platform-hero">
+            <div class="platform-badge-row">
+              <span class="eyebrow small">Home Base</span>
+              <span class="status-pill">Guide active</span>
+            </div>
+
+            <div class="platform-main-layout">
+              <div class="platform-guide-stage">
+                <div class="platform-guide-avatar" id="platform-guide-avatar"></div>
+              </div>
+
+              <div class="platform-guide-copy">
+                <h2 id="platform-title">Welcome inside!</h2>
+                <p class="platform-subtitle" id="platform-subtitle">Your guide is ready to stay with you.</p>
+                <div class="platform-dialogue glass-strip" id="platform-dialogue">
+                  Your guide will share tips, feedback, and encouragement as you explore.
+                </div>
+              </div>
+            </div>
+
+            <div class="platform-stats">
+              <div class="stat-card">
+                <span class="stat-label">Age</span>
+                <span class="stat-value" id="platform-age">--</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Guide</span>
+                <span class="stat-value" id="platform-guide-name">--</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Badges</span>
+                <span class="stat-value" id="platform-badge-count">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Unlocked Level</span>
+                <span class="stat-value" id="platform-level-window">1</span>
+              </div>
+            </div>
+
+            <div class="platform-actions">
+              <button class="secondary-button" id="restart-button" type="button">Restart Journey</button>
+              <button class="primary-button" id="home-games-button" type="button">Open Games</button>
+              <button class="primary-button" id="home-levels-button" type="button">Open Levels</button>
+            </div>
+
+            <div class="home-link-row">
+              <button class="secondary-button compact-link-button" id="home-dashboard-button" type="button">View Progress</button>
+              <button class="secondary-button compact-link-button" id="home-shorts-button" type="button">Open Shorts</button>
+            </div>
+          </article>
+
+          <section class="home-side-rail">
+            <article class="glass-card daily-card">
+              <div class="module-topline">
+                <span class="module-icon">&#128197;</span>
+                <span class="module-status">Daily kindness tasks</span>
+              </div>
+              <h3>Today’s Challenges</h3>
+              <p>Practice kindness beyond the screen and collect points by marking real-world actions complete.</p>
+              <div class="daily-task-list" id="daily-task-list"></div>
+            </article>
+
+            <article class="glass-card module-card">
+              <div class="module-topline">
+                <span class="module-icon">&#127909;</span>
+                <span class="module-status">Reels + guidance</span>
+              </div>
+              <h3>Kindness Shorts</h3>
+              <p>Swipe through animated story cards with narration, choices, and guide commentary.</p>
+            </article>
+
+            <article class="glass-card module-card">
+              <div class="module-topline">
+                <span class="module-icon">&#127919;</span>
+                <span class="module-status">Simulation ready</span>
+              </div>
+              <h3>Mini Missions</h3>
+              <p>Play click-and-drag game moments where kind actions become hands-on practice.</p>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <!-- Games -->
+      <section class="screen" id="games-screen" data-screen="games">
+        <div class="screen-shell games-shell">
+          <div class="section-heading compact-heading">
+            <span class="eyebrow">Games Section</span>
+            <h2>Play, draw, color, and practice kindness</h2>
+            <p>Enjoy hands-on mini games, creative activities, and real-life kindness practice with a premium colorful interface.</p>
+          </div>
+
+          <article class="glass-card games-hero-card">
+            <div class="games-hero-copy">
+              <div class="module-topline">
+                <span class="module-icon">&#127752;</span>
+                <span class="module-status">Interactive kindness lab</span>
+              </div>
+              <h3>Fun activities with real-world lessons</h3>
+              <p id="games-guide-message">Your guide will cheer you on while you draw, color, clean the park, help a friend, and jump into kindness shorts.</p>
+            </div>
+
+            <div class="games-hero-stats">
+              <div class="stat-card">
+                <span class="stat-label">Points</span>
+                <span class="stat-value" id="games-points">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Games Won</span>
+                <span class="stat-value" id="games-complete-count">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Shapes Colored</span>
+                <span class="stat-value" id="games-color-count">0</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="games-grid">
+            <article class="glass-card game-card drawing-card">
+              <div class="module-topline">
+                <span class="module-icon">&#127912;</span>
+                <span class="module-status">Drawing Game</span>
+              </div>
+              <h3>Kindness Art Board</h3>
+              <p>Draw a kind poster, happy rainbow, or a helpful scene with bright colors.</p>
+
+              <div class="drawing-toolbar">
+                <div class="color-palette">
+                  <button class="color-swatch active" type="button" data-draw-color="#7a57ff" style="--swatch:#7a57ff" aria-label="Purple paint"></button>
+                  <button class="color-swatch" type="button" data-draw-color="#ff7db8" style="--swatch:#ff7db8" aria-label="Pink paint"></button>
+                  <button class="color-swatch" type="button" data-draw-color="#68d1ff" style="--swatch:#68d1ff" aria-label="Blue paint"></button>
+                  <button class="color-swatch" type="button" data-draw-color="#ffd763" style="--swatch:#ffd763" aria-label="Yellow paint"></button>
+                  <button class="color-swatch" type="button" data-draw-color="#7be3a3" style="--swatch:#7be3a3" aria-label="Green paint"></button>
+                </div>
+                <button class="secondary-button compact-link-button" id="clear-canvas-button" type="button">Clear Canvas</button>
+              </div>
+
+              <div class="drawing-board-shell">
+                <canvas id="drawing-canvas" width="640" height="420" aria-label="Drawing canvas"></canvas>
+              </div>
+
+              <p class="game-tip">&#10024; Draw something that reminds you to be kind.</p>
+            </article>
+
+            <article class="glass-card game-card coloring-card">
+              <div class="module-topline">
+                <span class="module-icon">&#127912;</span>
+                <span class="module-status">Coloring Game</span>
+              </div>
+              <h3>Tap to Fill the Shapes</h3>
+              <p>Pick a color, then tap the circle, house, or tree to fill it.</p>
+
+              <div class="drawing-toolbar">
+                <div class="color-palette">
+                  <button class="color-swatch active" type="button" data-fill-color="#8b74ff" style="--swatch:#8b74ff" aria-label="Purple fill"></button>
+                  <button class="color-swatch" type="button" data-fill-color="#ff9f6f" style="--swatch:#ff9f6f" aria-label="Orange fill"></button>
+                  <button class="color-swatch" type="button" data-fill-color="#68d1ff" style="--swatch:#68d1ff" aria-label="Blue fill"></button>
+                  <button class="color-swatch" type="button" data-fill-color="#7be3a3" style="--swatch:#7be3a3" aria-label="Green fill"></button>
+                  <button class="color-swatch" type="button" data-fill-color="#ffd763" style="--swatch:#ffd763" aria-label="Yellow fill"></button>
+                </div>
+                <div class="selected-color-pill" id="selected-fill-label">Selected: Purple</div>
+              </div>
+
+              <div class="coloring-board-shell">
+                <svg class="coloring-board" id="coloring-board" viewBox="0 0 360 260" role="img" aria-label="Coloring board with shapes">
+                  <circle class="coloring-shape" data-color-target="circle" cx="74" cy="88" r="42"></circle>
+                  <rect class="coloring-shape" data-color-target="house" x="154" y="116" width="76" height="72" rx="14"></rect>
+                  <polygon class="coloring-shape" data-color-target="house" points="142,124 192,72 244,124"></polygon>
+                  <rect class="coloring-shape trunk" data-color-target="tree" x="295" y="148" width="22" height="54" rx="8"></rect>
+                  <circle class="coloring-shape" data-color-target="tree" cx="306" cy="110" r="34"></circle>
+                </svg>
+              </div>
+
+              <p class="game-feedback" id="coloring-feedback">Choose a color and tap a shape to fill it.</p>
+            </article>
+
+            <article class="glass-card game-card clean-park-card">
+              <div class="module-topline">
+                <span class="module-icon">&#127794;</span>
+                <span class="module-status">Game 1: Clean the Park</span>
+              </div>
+              <h3>Drag Trash into the Dustbin</h3>
+              <p>Keep the park clean by dragging each item into the dustbin. You can also tap the items on small screens.</p>
+
+              <div class="park-scene">
+                <div class="park-trash-bank" id="park-trash-bank"></div>
+                <div class="park-bin" id="park-bin">
+                  <span class="park-bin-icon">&#128465;</span>
+                  <strong>Dustbin</strong>
+                  <span>Drop trash here</span>
+                </div>
+              </div>
+
+              <p class="game-feedback" id="park-feedback">Drag all the litter into the dustbin to earn points.</p>
+            </article>
+
+            <article class="glass-card game-card help-friend-card">
+              <div class="module-topline">
+                <span class="module-icon">&#129309;</span>
+                <span class="module-status">Game 2: Help a Friend</span>
+              </div>
+              <h3>Choose the Kind Response</h3>
+              <p>A friend dropped their books and looks upset. What should you do?</p>
+
+              <div class="friend-scene">
+                <div class="friend-visual">&#128218; &#128532; &#10145; &#128522;</div>
+                <div class="choice-row help-friend-actions">
+                  <button class="secondary-button help-choice-button" type="button" data-help-choice="help">Help</button>
+                  <button class="secondary-button help-choice-button" type="button" data-help-choice="ignore">Ignore</button>
+                </div>
+              </div>
+
+              <p class="game-feedback" id="friend-feedback">Choose the action that shows kindness and respect.</p>
+            </article>
+
+            <article class="glass-card game-card launcher-card">
+              <div class="module-topline">
+                <span class="module-icon">&#127909;</span>
+                <span class="module-status">More Adventures</span>
+              </div>
+              <h3>Keep Exploring</h3>
+              <p>Jump into kindness reels, simulation levels, or your progress dashboard whenever you are ready.</p>
+
+              <div class="game-launcher-buttons">
+                <button class="primary-button" id="games-open-shorts-button" type="button">Open Shorts</button>
+                <button class="secondary-button" id="games-open-levels-button" type="button">Open Levels</button>
+                <button class="secondary-button" id="games-open-dashboard-button" type="button">View Progress</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shorts -->
+      <section class="screen" id="shorts-screen" data-screen="shorts">
+        <div class="screen-shell shorts-shell">
+          <div class="section-heading compact-heading">
+            <span class="eyebrow">Kindness Shorts</span>
+            <h2>Voice-guided vertical stories</h2>
+            <p>Swipe or scroll through reels-style stories while your guide narrates, reacts, and helps you make better choices.</p>
+          </div>
+
+          <div class="shorts-layout">
+            <div class="shorts-stage glass-card">
+              <div class="shorts-topbar">
+                <div class="short-progress">
+                  <span id="short-progress-text">1 / 5</span>
+                  <div class="short-progress-bar">
+                    <span id="short-progress-fill"></span>
+                  </div>
+                </div>
+
+                <button class="like-button" id="like-button" type="button" aria-label="Like this short">
+                  <span class="like-heart">&#10084;</span>
+                </button>
+              </div>
+
+              <div class="shorts-viewport" id="shorts-viewport">
+                <div class="shorts-track" id="shorts-track"></div>
+              </div>
+
+              <div class="shorts-actions">
+                <button class="secondary-button" id="previous-short-button" type="button">Previous</button>
+                <button class="primary-button" id="next-short-button" type="button">Next Short</button>
+              </div>
+            </div>
+
+            <aside class="glass-card narrator-card">
+              <div class="module-topline">
+                <span class="module-icon">&#128264;</span>
+                <span class="module-status">Character narration</span>
+              </div>
+              <div class="narrator-stage" id="narrator-guide-stage"></div>
+              <div class="narrator-bubble glass-strip" id="narrator-text">
+                Your guide will narrate each short here with voice and text.
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Levels -->
+      <section class="screen" id="levels-screen" data-screen="levels">
+        <div class="screen-shell levels-shell">
+          <div class="section-heading compact-heading">
+            <span class="eyebrow">Reusable Level Engine</span>
+            <h2>Modular kindness missions that grow with age</h2>
+            <p>Explore data-driven levels with reusable game mechanics, visual worlds, puzzle types, voice guidance, rewards, and scalable progression.</p>
+          </div>
+
+          <div class="levels-layout">
+            <article class="glass-card levels-overview-card">
+              <div class="module-topline">
+                <span class="module-icon">&#128200;</span>
+                <span class="module-status" id="level-band-label">Visual Kindness Starters</span>
+              </div>
+              <h3 id="current-level-title">Level 1</h3>
+              <p class="level-overview-copy" id="current-level-copy">Choose a level to view its scenario and task.</p>
+
+              <div class="progress-row">
+                <div class="progress-copy">
+                  <strong>Level progress</strong>
+                  <span id="level-progress-text">0 completed</span>
+                </div>
+                <div class="progress-bar">
+                  <span id="level-progress-fill"></span>
+                </div>
+              </div>
+
+              <div class="level-overview-guide glass-strip" id="level-overview-guide">
+                Your guide will give level-specific coaching here.
+              </div>
+            </article>
+
+            <article class="glass-card level-grid-card">
+              <div class="module-topline">
+                <span class="module-icon">&#127942;</span>
+                <span class="module-status">Age-matched progression</span>
+              </div>
+              <div class="level-grid" id="level-grid"></div>
+            </article>
+
+            <article class="glass-card simulation-card">
+              <div class="module-topline">
+                <span class="module-icon">&#127918;</span>
+                <span class="module-status">Interactive level lab</span>
+              </div>
+
+              <div class="simulation-header">
+                <div>
+                  <h3 id="simulation-level-name">Choose a level</h3>
+                  <p class="simulation-copy" id="simulation-level-scenario">Level details will appear here.</p>
+                </div>
+                <div class="simulation-header-actions">
+                  <div class="simulation-reward-pill" id="simulation-reward-pill">Reward: +0</div>
+                  <button class="favorite-game-button glass-card" id="favorite-game-button" type="button" aria-pressed="false">
+                    <span id="favorite-game-icon">&#9825;</span>
+                    <span id="favorite-game-label">Favorite</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="simulation-meta-row">
+                <span class="simulation-meta-pill" id="simulation-level-number">Level 1 of 28</span>
+                <span class="simulation-meta-pill" id="simulation-level-type">Game Type</span>
+                <span class="simulation-meta-pill" id="simulation-level-place">Scene</span>
+              </div>
+
+              <div class="simulation-task-strip glass-strip" id="simulation-task-strip">
+                Pick a level to start its task.
+              </div>
+
+              <div class="level-scene-card" id="level-scene-card">
+                <div class="level-scene-backdrop" id="level-scene-backdrop">
+                  <div class="level-scene-sparkles" id="level-scene-sparkles" aria-hidden="true"></div>
+                  <div class="level-scene-caption">
+                    <span class="level-scene-kicker" id="level-scene-kicker">Scene Preview</span>
+                    <strong id="level-scene-title">Kindness world</strong>
+                  </div>
+                  <div class="level-scene-art" id="level-scene-art"></div>
+                </div>
+              </div>
+
+              <div class="simulation-stage" id="simulation-stage"></div>
+
+              <div class="simulation-footer">
+                <div class="simulation-feedback" id="simulation-feedback">Your feedback will appear here.</div>
+                <div class="simulation-actions">
+                  <button class="secondary-button" id="simulation-prev-button" type="button">Previous Level</button>
+                  <button class="secondary-button" id="simulation-reset-button" type="button">Reset Task</button>
+                  <button class="primary-button" id="simulation-next-button" type="button">Next Level</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard -->
+      <section class="screen" id="dashboard-screen" data-screen="dashboard">
+        <div class="screen-shell dashboard-shell">
+          <div class="section-heading compact-heading">
+            <span class="eyebrow">Parent Dashboard</span>
+            <h2>Progress at a glance</h2>
+            <p>Track child age, selected guide, points earned, lessons completed, levels finished, badges unlocked, and daily progress in one view.</p>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="glass-card dashboard-card">
+              <span class="dashboard-kicker">Profile</span>
+              <div class="dashboard-profile">
+                <div class="dashboard-guide-avatar" id="dashboard-guide-avatar"></div>
+                <div>
+                  <h3 id="dashboard-guide-name">Guide</h3>
+                  <p class="dashboard-copy">Age: <span id="dashboard-age">--</span></p>
+                  <p class="dashboard-copy">Dialogue style: <span id="dashboard-personality">--</span></p>
+                  <p class="dashboard-copy">Coins: <span id="dashboard-coins">0</span></p>
+                  <p class="dashboard-copy">Favorite games: <span id="dashboard-favorites">0</span></p>
+                </div>
+              </div>
+            </article>
+
+            <article class="glass-card dashboard-card">
+              <span class="dashboard-kicker">Progress</span>
+              <div class="progress-row">
+                <div class="progress-copy">
+                  <strong>Shorts completed</strong>
+                  <span id="dashboard-shorts">0 / 5</span>
+                </div>
+                <div class="progress-bar">
+                  <span id="dashboard-shorts-fill"></span>
+                </div>
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-copy">
+                  <strong>Levels completed</strong>
+                  <span id="dashboard-levels">0 / 28</span>
+                </div>
+                <div class="progress-bar">
+                  <span id="dashboard-levels-fill"></span>
+                </div>
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-copy">
+                  <strong>Kindness points</strong>
+                  <span id="dashboard-points-progress">0 / 300</span>
+                </div>
+                <div class="progress-bar success">
+                  <span id="dashboard-points-fill"></span>
+                </div>
+              </div>
+            </article>
+
+            <article class="glass-card dashboard-card">
+              <span class="dashboard-kicker">Daily Missions</span>
+              <div class="progress-row">
+                <div class="progress-copy">
+                  <strong>Tasks completed</strong>
+                  <span id="dashboard-daily">0 / 3</span>
+                </div>
+                <div class="progress-bar success">
+                  <span id="dashboard-daily-fill"></span>
+                </div>
+              </div>
+              <p class="dashboard-copy">Daily missions encourage real-world kindness beyond the app.</p>
+            </article>
+
+            <article class="glass-card dashboard-card badge-dashboard-card">
+              <span class="dashboard-kicker">Badges</span>
+              <div class="badge-list" id="badge-list"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <nav class="bottom-nav glass-card" id="bottom-nav" hidden>
+      <button class="nav-item active" data-nav="home" type="button">
+        <span class="nav-icon">&#127968;</span>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-nav="games" type="button">
+        <span class="nav-icon">&#127918;</span>
+        <span>Games</span>
+      </button>
+      <button class="nav-item" data-nav="shorts" type="button">
+        <span class="nav-icon">&#127909;</span>
+        <span>Shorts</span>
+      </button>
+    </nav>
+  </main>
+
+  <div class="badge-toast" id="unlock-badge" hidden>
+    <span class="badge-toast-icon">&#127942;</span>
+    <div>
+      <p class="badge-toast-title">Badge unlocked</p>
+      <p class="badge-toast-copy" id="unlock-badge-copy">Kind Helper</p>
+    </div>
+  </div>
+
+  <div class="lesson-popup glass-card" id="lesson-popup" hidden>
+    <p class="lesson-popup-kicker">Kindness Lesson</p>
+    <h3 id="lesson-popup-title">Great job!</h3>
+    <p class="lesson-popup-copy" id="lesson-popup-copy">Helping others is kind.</p>
+    <button class="secondary-button compact-link-button" id="lesson-popup-close" type="button">Keep Going</button>
+  </div>
+
+  <aside class="floating-assistant" id="assistant" hidden>
+    <div class="assistant-bubble">
+      <p class="assistant-label">Guide online</p>
+      <p class="assistant-message" id="assistant-message">Your guide will appear here once you enter the app.</p>
+      <p class="assistant-state" id="assistant-state">State: Idle</p>
+    </div>
+    <div class="assistant-avatar" id="assistant-avatar"></div>
+  </aside>
+
+  <script src="levels-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
